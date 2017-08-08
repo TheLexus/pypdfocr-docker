@@ -17,5 +17,5 @@ WORKDIR /
 COPY pypdfocr.conf /etc
 
 VOLUME ${PDFOCR_BASEPATH}/documents ${PDFOCR_BASEPATH}/pdfinput
-CMD ["/usr/local/bin/pypdfocr","-l","${T_LANG}","-w","${PDFOCR_BASEPATH}/pdfinput","-f","-c","/etc/pypdfocr.conf","-n"]
-
+#CMD ["/usr/local/bin/pypdfocr","-l","${T_LANG}","-w","${PDFOCR_BASEPATH}/pdfinput","-f","-c","/etc/pypdfocr.conf","-n"]
+CMD ["/bin/bash"]
