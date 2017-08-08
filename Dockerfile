@@ -14,10 +14,10 @@ RUN set -x \
 	&& mkdir ${PDFOCR_BASEPATH}/pdfinput \
 	&& mkdir ${PDFOCR_BASEPATH}/documents \
 	&& apt-get purge -y --auto-remove
-
-RUN echo "target_folder: \"${PDFOCR_BASEPATH}/documents\"\ndefault_folder: \"${PDFOCR_BASEDIR}/documents\"" > /etc/pypdfocr.conf
+	
+WORKDIR /
+COPY pypdfocr.conf /etc
 
 VOLUME ${PDFOCR_BASEPATH}/documents ${PDFOCR_BASEPATH}/pdfinput
-WORKDIR ${PDFOCR_BASEPATH}
 CMD ["/usr/local/bin/pypdfocr","-l","${T_LANG}","-w","${PDFOCR_BASEPATH}/pdfinput","-f","-c",/etc/pypdfocr.conf","-n"]
 
