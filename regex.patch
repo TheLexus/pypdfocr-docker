@@ -1,5 +1,5 @@
---- /usr/local/lib/python2.7/dist-packages/pypdfocr/pypdfocr_watcher.py	Thu Feb 18 22:02:07 2016
-+++ /usr/local/lib/python2.7/dist-packages/pypdfocr/pypdfocr_watcher.py	Tue Aug 08 12:28:31 2017
+--- C:/Users/Reinhardt/Downloads/pypdfocr/pypdfocr-0.9.1/pypdfocr/pypdfocr_pdffiler.py	Thu Feb 18 22:02:07 2016
++++ C:/Users/Reinhardt/Downloads/pypdfocr/pypdfocr-0.9.1/pypdfocr/pypdfocr_pdffiler_regex.py	Tue Aug 08 12:28:31 2017
 @@ -53,7 +53,8 @@
          for folder,strings in self.filer.folder_targets.items():
              for s in strings:
