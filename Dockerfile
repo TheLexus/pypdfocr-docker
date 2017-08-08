@@ -6,8 +6,6 @@ ENV T_LANG deu
 RUN set -x \
 	&& apt-get update && apt-get install -y locales python python-pip tesseract-ocr tesseract-ocr-${T_LANG} ghostscript imagemagick poppler-utils\
 	&& pip install pypdfocr \
-	&& mkdir ${PDFOCR_BASEPATH}/pdfinput \
-	&& mkdir ${PDFOCR_BASEPATH}/documents \
 	&& apt-get purge -y --auto-remove
 	
 RUN locale-gen en_US.UTF-8  
