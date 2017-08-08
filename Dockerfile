@@ -25,8 +25,8 @@ WORKDIR /
 COPY pypdfocr.conf ${PDFOCR_CONFIG}
 
 # Patch for _text files
-COPY watcher_ignore_text_pdf.patch .
-RUN patch -l /usr/local/lib/python2.7/dist-packages/pypdfocr/pypdfocr_watcher.py -i watcher_ignore_text_pdf.patch
+COPY watcher_ignore_textpdf.patch .
+RUN patch -l /usr/local/lib/python2.7/dist-packages/pypdfocr/pypdfocr_watcher.py -i watcher_ignore_textpdf.patch
 
 # Patch for regex
 COPY regex.patch .
