@@ -2,6 +2,7 @@ FROM ubuntu:latest
 
 ENV PDFOCR_CONFIG /etc/pypdfocr.conf
 ENV PDFOCR_BASEPATH /srv
+ENV PDFOCR_ARGS "-l ${T_LANG} -w ${PDFOCR_BASEPATH}/pdfinput -f -c ${PDFOCR_CONFIG} -n"
 ENV T_LANG deu
 
 RUN sh -c "set -x \
@@ -18,5 +19,5 @@ WORKDIR /
 COPY pypdfocr.conf ${PDFOCR_CONFIG}
 
 VOLUME ${PDFOCR_BASEPATH}/documents ${PDFOCR_BASEPATH}/pdfinput
-CMD ["sh","-c","/usr/local/bin/pypdfocr -l ${T_LANG} -w ${PDFOCR_BASEPATH}/pdfinput -f -c ${PDFOCR_CONFIG} -n"]
+CMD ["sh","-c","/usr/local/bin/pypdfocr ${PDFOCR_ARGS}"]
 #CMD ["/bin/bash"]
