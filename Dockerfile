@@ -24,6 +24,10 @@ RUN cp /usr/share/tesseract-ocr/tessdata/${T_LANG}.traineddata /usr/share/tesser
 WORKDIR /
 COPY pypdfocr.conf ${PDFOCR_CONFIG}
 
+# Patch for _text files
+COPY issue_41.patch .
+RUN patch -l /usr/local/lib/python2.7/dist-packages/pypdfocr/pypdfocr_watcher.py -i issue_41.patch
+
 # Patch for regex
 COPY regex.patch .
 RUN patch -l /usr/local/lib/python2.7/dist-packages/pypdfocr/pypdfocr_pdffiler.py -i regex.patch
