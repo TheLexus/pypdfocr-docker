@@ -19,7 +19,7 @@ COPY pypdfocr.conf ${PDFOCR_CONFIG}
 
 # Patch for regex
 COPY regex.patch .
-RUN patch -l /usr/local/lib/python2.7/dist-packages/pypdfocr/pypdfocr_watcher.py -i issue_41.patch
+RUN patch -l /usr/local/lib/python2.7/dist-packages/pypdfocr/pypdfocr_pdffiler.py -i regex.patch
 
 VOLUME ${PDFOCR_BASEPATH}/documents ${PDFOCR_BASEPATH}/pdfinput
 CMD ["sh","-c","/usr/local/bin/pypdfocr --skip-preprocess -l ${T_LANG} -w ${PDFOCR_BASEPATH}/pdfinput -f -c ${PDFOCR_CONFIG} -n"]
