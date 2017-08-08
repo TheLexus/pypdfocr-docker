@@ -1,12 +1,12 @@
---- C:/Users/Reinhardt/Downloads/pypdfocr/pypdfocr-0.9.1/pypdfocr/pypdfocr_pdffiler.py	Thu Feb 18 22:02:07 2016
-+++ C:/Users/Reinhardt/Downloads/pypdfocr/pypdfocr-0.9.1/pypdfocr/pypdfocr_pdffiler_regex.py	Tue Aug 08 12:28:31 2017
+--- /usr/local/lib/python2.7/dist-packages/pypdfocr/pypdfocr_pdffiler.py	2017-08-08 12:24:22.862557000 +0000
++++ pypdfocr_pdffiler.py	2017-08-08 12:20:56.387379670 +0000
 @@ -53,7 +53,8 @@
          for folder,strings in self.filer.folder_targets.items():
              for s in strings:
                  logging.debug("Checking string %s" % s)
 -                if s in searchText:
-+                # if s in searchText:
-+				if re.search(s, searchText, flags=re.M):
++                #if s in searchText:
++		if re.search(s, searchText, re.M):
                      logging.info("Matched keyword '%s'" % s)
                      return folder
          # No match found, so return 
