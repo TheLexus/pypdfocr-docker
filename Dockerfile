@@ -34,7 +34,7 @@ COPY pypdfocr.conf ${PDFOCR_CONFIG}
 # download pypdfocr from own repository (with modifications and patches)
 RUN mkdir /tmp/pypdfocr
 WORKDIR /tmp/pypdfocr
-RUN sh -c curl -L https://github.com/thelexus/pypdfocr/tarball/master | tar xz --strip=1
+RUN sh -c "curl -L https://github.com/thelexus/pypdfocr/tarball/master | tar xz --strip=1"
 RUN sh -c python setup.py install
 
 # define volumes
