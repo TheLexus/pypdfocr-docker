@@ -7,7 +7,7 @@ ENV T_LANG deu
 
 # install software
 RUN sh -c "set -x \
-	&& apt-get update && apt-get install -y locales curl python python-setuptools python-watchdog python-reportlab python-pil python-pypdf2 python-oauth python-httplib2 tesseract-ocr tesseract-ocr-${T_LANG} ghostscript imagemagick poppler-utils\
+	&& apt-get update && apt-get install -y locales curl python python-setuptools python-watchdog python-reportlab python-pil python-pypdf2 python-oauth2client python-httplib2 tesseract-ocr tesseract-ocr-${T_LANG} ghostscript imagemagick poppler-utils\
 	&& apt-get purge -y --auto-remove"
 
 # setup locales
@@ -35,7 +35,7 @@ COPY pypdfocr.conf ${PDFOCR_CONFIG}
 RUN mkdir /tmp/pypdfocr
 WORKDIR /tmp/pypdfocr
 RUN sh -c "curl -L https://github.com/thelexus/pypdfocr/tarball/master | tar xz --strip=1"
-RUN sh -c python setup.py install
+RUN sh -c "python setup.py install"
 
 # define volumes
 VOLUME ${PDFOCR_BASEPATH}/documents ${PDFOCR_BASEPATH}/pdfinput
