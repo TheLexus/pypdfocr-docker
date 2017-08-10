@@ -7,7 +7,7 @@ ENV T_LANG deu
 
 # install software
 RUN sh -c "set -x \
-	&& apt-get update && apt-get install -y locales curl python python-setuptools python-watchdog python-reportlab python-pil python-pypdf2 python-oauthlib python-httplib2 tesseract-ocr tesseract-ocr-${T_LANG} ghostscript imagemagick poppler-utils\
+	&& apt-get update && apt-get install -y locales curl python python-setuptools python-watchdog python-reportlab python-pil python-pypdf2 tesseract-ocr tesseract-ocr-${T_LANG} ghostscript imagemagick poppler-utils\
 	&& apt-get purge -y --auto-remove"
 
 # setup locales
