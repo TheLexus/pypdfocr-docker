@@ -7,8 +7,7 @@ ENV T_LANG deu
 
 # install software
 RUN sh -c "set -x \
-	&& apt-get update && apt-get install -y locales python python-pip tesseract-ocr tesseract-ocr-${T_LANG} ghostscript imagemagick poppler-utils\
-	&& pip install pypdfocr \
+	&& apt-get update && apt-get install -y locales python tesseract-ocr tesseract-ocr-${T_LANG} ghostscript imagemagick poppler-utils\
 	&& apt-get purge -y --auto-remove"
 
 # setup locales
@@ -25,15 +24,22 @@ WORKDIR /
 COPY pypdfocr.conf ${PDFOCR_CONFIG}
 
 # Patch for _text files
-COPY watcher_ignore_textpdf.patch .
-RUN patch -l /usr/local/lib/python2.7/dist-packages/pypdfocr/pypdfocr_watcher.py -i watcher_ignore_textpdf.patch
+#COPY watcher_ignore_textpdf.patch .
+#RUN patch -l /usr/local/lib/python2.7/dist-packages/pypdfocr/pypdfocr_watcher.py -i watcher_ignore_textpdf.patch
 
 # Patch for regex
-COPY regex.patch .
-RUN patch -l /usr/local/lib/python2.7/dist-packages/pypdfocr/pypdfocr_pdffiler.py -i regex.patch
+#COPY regex.patch .
+#RUN patch -l /usr/local/lib/python2.7/dist-packages/pypdfocr/pypdfocr_pdffiler.py -i regex.patch
+
+# download pypdfocr from own repository (with modifications and patches)
+RUN mkdir /tmp/pypdfocr
+WORKDIR /tmp/pypdfocr
+RUN sh -c curl -L https://github.com/thelexus/pypdfocr/tarball/master | tar xz --strip=1
+RUN sh -c python setup.py install
 
 # define volumes
 VOLUME ${PDFOCR_BASEPATH}/documents ${PDFOCR_BASEPATH}/pdfinput
 
+WORKDIR /
 CMD ["sh","-c","/usr/local/bin/pypdfocr --skip-preprocess -l ${T_LANG} -w ${PDFOCR_BASEPATH}/pdfinput -f -c ${PDFOCR_CONFIG} -n"]
 #CMD ["/bin/bash"]
