@@ -41,5 +41,5 @@ RUN sh -c "python setup.py install"
 VOLUME ${PDFOCR_BASEPATH}/documents ${PDFOCR_BASEPATH}/pdfinput
 
 WORKDIR /
-CMD ["sh","-c","/usr/local/bin/pypdfocr --skip-preprocess -l ${T_LANG} -w ${PDFOCR_BASEPATH}/pdfinput --splitting -f -c ${PDFOCR_CONFIG} -n"]
+CMD ["sh","-c","/usr/local/bin/pypdfocr --skip-preprocess -l ${T_LANG} --remove -w ${PDFOCR_BASEPATH}/pdfinput --splitting -f -c ${PDFOCR_CONFIG} -n"]
 #CMD ["/bin/bash"]
